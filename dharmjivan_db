@@ -1,0 +1,50 @@
+CREATE TABLE reservations (
+  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  email VARCHAR(50) DEFAULT NULL,
+  reservation_date DATE NOT NULL,
+  reservation_time TIME NOT NULL,
+  guests INT(2) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- SQL to create the menu_items table
+CREATE TABLE menu_items (
+  id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  category VARCHAR(50) NOT NULL, -- 'Dinner', 'Drinks', 'Lunch', 'Dessert'
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  price DECIMAL(10, 2) NOT NULL,
+  currency VARCHAR(10) NOT NULL DEFAULT 'Rs.'
+);
+
+-- Create a new table for Admin Users
+CREATE TABLE admin_users (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    -- Storing a hash generated for the password 'password123'
+    password_hash VARCHAR(255) NOT NULL
+);
+
+-- Insert a default admin user
+-- Username: admin
+-- Password: password123 (This is the plain text password corresponding to the hash below)
+INSERT INTO admin_users (username, password_hash) VALUES 
+('admin', '$2y$10$t/sB8EaY7gV6nL7yL5n5mO2k9t/x.j.r.a.p.Z.z.m.2.o.q.w.w.q.4.0.K.');
+
+CREATE TABLE opening_hours (
+    day_id INT(1) PRIMARY KEY, -- 1=Sunday, 2=Monday... 7=Saturday
+    day_name VARCHAR(10) NOT NULL,
+    hours_open TIME,
+    hours_close TIME
+);
+
+-- Insert current opening times (8:00 am – 12:00 pm, Closed Friday/Saturday)
+INSERT INTO opening_hours (day_id, day_name, hours_open, hours_close) VALUES
+(1, 'Sunday', '08:00:00', '12:00:00'),
+(2, 'Monday', '08:00:00', '12:00:00'),
+(3, 'Tuesday', '08:00:00', '12:00:00'),
+(4, 'Wednesday', '08:00:00', '12:00:00'),
+(5, 'Thursday', '08:00:00', '12:00:00'),
+(6, 'Friday', NULL, NULL), -- Closed
+(7, 'Saturday', NULL, NULL); -- Closed
