@@ -1,22 +1,53 @@
 <?php
+// Start the session
 session_start();
+
+// Include the database connection
 include("../config/connection.php");
 
-extract($_POST);
+// Check if the form was submitted
+if (isset($_POST['login'])) {
 
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
 
-// $qry="select * from admin where email='".$email."' && password='".$password."'";
-$qry="select * from admin where email='".$email."' && password='".MD5($password)."'";
+    // Check if fields are empty
+    if (empty($email) || empty($password)) {
+        header("location:../index.php?error=empty");
+        exit();
+    }
 
-$result = mysqli_query($con, $qry) or die(mysqli_error($con));
+    // Query the admin_users table
+    $sql = "SELECT * FROM admin_users WHERE email = '$email'";
+    $result = mysqli_query($con, $sql);
 
-$count = mysqli_num_rows($result);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
 
-if ($count > 0) {
-    $_SESSION["email"] = $email;
-    header('location:../dashboard.php');
+        // Verify the password
+        if (password_verify($password, $row['password_hash'])) {
+            // Password is correct!
+            // Set session variables
+            $_SESSION['admin_logged_in'] = true; // For compatibility with old system if needed
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['admin_id'] = $row['id'];
+
+            // Redirect to the dashboard
+            header("location:../dashboard.php");
+            exit();
+        } else {
+            // Invalid password
+            header("location:../index.php?error=invalid");
+            exit();
+        }
+    } else {
+        // No user found with that email
+        header("location:../index.php?error=invalid");
+        exit();
+    }
 } else {
-    header('location:../index.php');
+    // If not accessed via form, redirect to login
+    header("location:../index.php");
+    exit();
 }
-
 ?>

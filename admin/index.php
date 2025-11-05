@@ -1,87 +1,92 @@
 <?php
 session_start();
+
 if (isset($_SESSION["email"])) {
-    header('location:dashboard.php');
+    header('Location: dashboard.php');
+    exit();
 } else {
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin | Log in</title>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin | Log in</title>
-
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    </head>
-
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <!-- /.login-logo -->
-            <div class="card card-outline card-primary">
-                <div class="card-header text-center">
-                    <a href="" class="h1"><b>Admin</b>LTE</a>
-                </div>
-                <div class="card-body">
-
-                    <form id="logIn" action="customer/login_process.php" method="post">
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" name="password" placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <!-- <div class="icheck-primary">
-                                    <a href="forgot_password.php">I forgot my password</a>
-                                </div> -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
-
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="#" class="h1"><b>Admin</b>LTE</a>
         </div>
-        <!-- /.login-box -->
+        <div class="card-body">
 
-        <!-- jQuery -->
-        <script src="plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="dist/js/adminlte.min.js"></script>
-        <!-- jquery-validation -->
-        <script src="dist/js/form_validation.js"></script>
-        <script src="dist/js/jquery.validate.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script> -->
-    </body>
+        <?php
+        // ✅ Only show error message if ?error= is set
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            $message = '';
 
-    </html>
+            if ($error == 'empty') {
+                $message = 'Email and Password fields are required.';
+            } elseif ($error == 'invalid') {
+                $message = 'Invalid email or password. Please try again.';
+            }
+
+            if (!empty($message)) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ' . htmlspecialchars($message) . '
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>';
+            }
+        }
+        ?>
+
+        <form id="logIn" action="customer/login_process.php" method="post">
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+            </div>
+        </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/form_validation.js"></script>
+<script src="dist/js/jquery.validate.min.js"></script>
+</body>
+</html>
 <?php
 }
 ?>

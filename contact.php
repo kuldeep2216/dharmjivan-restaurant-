@@ -1,46 +1,56 @@
 <?php
-	include("inc/header.php"); 
-	?>
-<!-- Contact -->
-		<div id="contact" class="section">
+    // Includes the top navigation bar
+    include("inc/header.php"); 
+?>
 
-			<!-- container -->
-			<div class="container">
+<div id="page-header" class="banner-area">
+    <div class="bg-image bg-parallax overlay" style="background-image:url(./img/background02.jpg)"></div>
+    <div class="home-wrapper">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <div class="home-content">
+                <h1 class="white-text">Contact Us</h1>
+                <h4 class="white-text lead">We'd love to hear from you.</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="contact" class="section">
 
-				<!-- row -->
-				<div class="row">
+    <div class="container">
 
-					<div class="col-md-5 col-md-offset-7">
-						<div class="section-header">
-							<h4 class="sub-title">Contact Us</h4>
-							<h2 class="title">Get In Touch</h2>
-						</div>
-						<div class="contact-content">
-							<p>Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum.</p>
-							<h3>Tel: <a href="#">9313431508</a></h3>
-							<p>Address: 3626 Khothariya,Rajkot</p>
-							<p>Email: <a href="#">Dharmjivan@email.com</a></p>
-							<ul class="list-inline">
-								<li><p>Follow Us:</p></li>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
+        <div class="row">
 
-				</div>
-				<!-- /row -->
+            <div class="col-md-8 col-md-offset-2 text-center">
+                
+                <div class="section-header">
+                    <h4 class="sub-title">Contact Us</h4>
+                    <h2 class="title">Get In Touch</h2>
+                </div>
 
-			</div>
-			<!-- /container -->
+                <div class="contact-content">
+                
+                    <p>
+                        Whether you have a question about our menu, want to book an event, or just want to say hello, 
+                        we are here to help. Reach out to us through any of the methods below.
+                    </p>
+                    
+                    <h3 style="margin-top: 30px;">Tel: <a href="tel:+911234567890">+91 1234567890</a></h3>
+                    <p>Address: 3626 Khothariya, Rajkot</p>
+                    <p>Email: <a href="mailto:Dharmjivan@email.com">Dharmjivan@email.com</a></p>
+                    
+                    <ul class="list-inline" style="margin-top: 30px;">
+                        <li><p>Follow Us:</p></li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                </div>
 
-			<!-- map -->
-			<div id="map"></div>
-			<!-- /map -->
-
-		</div>
-		<!-- Contact -->
-		 <?php
-	include("inc/footer.php"); 
-	?>
+            </div>
+            </div>
+        </div>
+    </div>
+<?php
+    // Includes the footer
+    include("inc/footer.php"); 
+?>
