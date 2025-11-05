@@ -32,6 +32,16 @@ CREATE TABLE admin_users (
 INSERT INTO admin_users (username, password_hash) VALUES 
 ('admin', '$2y$10$t/sB8EaY7gV6nL7yL5n5mO2k9t/x.j.r.a.p.Z.z.m.2.o.q.w.w.q.4.0.K.');
 
+-- ✅ Modify admin_users table: rename 'username' to 'email'
+ALTER TABLE admin_users
+CHANGE COLUMN username email VARCHAR(50) NOT NULL UNIQUE;
+
+-- ✅ Update default admin record to have proper email
+UPDATE admin_users
+SET email = 'admin@example.com'
+WHERE email = 'admin';
+
+
 CREATE TABLE opening_hours (
     day_id INT(1) PRIMARY KEY, -- 1=Sunday, 2=Monday... 7=Saturday
     day_name VARCHAR(10) NOT NULL,
